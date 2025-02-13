@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Buy Ticket{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/buy_ticket.css' %}">
+
+<div class="container mt-4">
+    <h2>Buy Ticket for {{ event.title }}</h2>
+    <p><strong>Date:</strong> {{ event.start|date:"F d, Y, h:i a" }}</p>
+    <p><strong>Place:</strong> {{ event.place.name }}</p>
+
+    {% if event.place.stadiumPhoto %}
+        <div class="stadium-map mt-4">
+            <h4>Stadium Map:</h4>
+            <img src="{{ event.place.stadiumPhoto.url }}" alt="Stadium Map" class="img-fluid rounded">
+        </div>
+    {% endif %}
+
+    <form id="ticket-form" method="post" action="{% url 'buy_ticket' event.id %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="ticket_category">Select Ticket Category:</label>
+            <select name="ticket_category" id="ticket_category" class="form-control" required>
+                <option value="" disabled selected>Select category</option>
+                <option value="normal" {% if selected_category == 'normal' %}selected{% endif %}>Normal</option>
+                <option value="discount" {% if selected_category == 'discount' %}selected{% endif %}>Discount</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="sector">Select Sector:</label>
+            <select name="sector" id="sector" class="form-control" required>
+                <option value="" disabled selected>Select sector</option>
+                {% for sector in sectors %}
+                    <option value="{{ sector.id }}" data-price="{{ sector.price }}">{{ sector.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="row">Select Row:</label>
+            <select name="row" id="row" class="form-control" required>
+                <option value="" disabled selected>Select row</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="seat">Select Seat:</label>
+            <select name="seat" id="seat" class="form-control" required>
+                <option value="" disabled selected>Select seat</option>
+            </select>
+        </div>
+
+        <div id="calculated-price" class="mt-3" style="display: none;">
+            <p><strong>Ticket Price:</strong> <span id="price-display">0.00 zł</span></p>
+        </div>
+
+        <input type="hidden" name="calculated_price" id="calculated_price_field" value="{{ ticket_price }}">
+
+        <div id="action-buttons">
+            <button type="submit" name="add_to_cart" class="btn btn-primary">Add to Cart</button>
+            <a href="{% url 'cart' %}" class="btn btn-info">Go to Cart</a>
+        </div>
+    </form>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+
+<script src="{% static 'js/buy_ticket/buy_ticket.js' %}"></script>
+{% endblock %}

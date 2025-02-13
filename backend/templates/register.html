@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="register-container mx-auto">
+        <h1>Sign Up</h1>
+        <p>Create a new account to get started</p>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email">
+                {% if form.email.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.email.errors.0 }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Enter password">
+                {% if form.password.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.password.errors.0 }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+                {% if form.confirm_password.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.confirm_password.errors.0 }}
+                    </div>
+                {% endif %}
+            </div>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors.0 }}
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-block" name="register_button">Register</button>
+        </form>
+        <p class="text-center mt-3">
+            Already have an account? <a href="{% url 'login' %}">Login here</a>
+        </p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

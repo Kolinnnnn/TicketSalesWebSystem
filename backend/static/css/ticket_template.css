@@ -1,0 +1,35 @@
+body {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.ticket {
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.ticket-details {
+    margin-top: 20px;
+}
+
+.qr-code {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.map {
+    text-align: center;
+    margin-top: 20px;
+}

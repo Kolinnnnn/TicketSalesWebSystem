@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h2>Welcome, {{ username }}!</h2>
+            <p class="lead">Choose your favorite event and secure your ticket now!</p>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for event in events %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card event-card">
+                    <div class="card-header event-header">
+                        <h5 class="event-title">{{ event.title }}</h5>
+                        <span class="badge bg-primary event-date">{{ event.start|date:"F d, Y" }}</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="event-time">
+                            <i class="bi bi-clock-fill"></i> {{ event.start|date:"H:i" }}
+                        </p>
+                        <p class="event-location">
+                            <i class="bi bi-geo-alt-fill"></i> {{ event.place.name }}
+                        </p>
+                        <a href="{% url 'buy_ticket' event.id %}" class="btn btn-primary btn-sm btn-block">Buy Tickets</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No events available at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

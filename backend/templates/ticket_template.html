@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'css/ticket_template.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="ticket">
+            <div class="ticket-header">
+                <h2>{{ order.event.title }}</h2>
+            </div>
+            <div class="ticket-details">
+                <p><strong>Date of Event:</strong> {{ event_date }}</p>
+                <p><strong>Sector:</strong> {{ order.seat.row.sector.name }}</p>
+                <p><strong>Row:</strong> {{ order.seat.row.name }}</p>
+                <p><strong>Seat:</strong> {{ order.seat.name }}</p>
+                <p><strong>Category:</strong> {{ order.ticket_type }}</p>
+                <p><strong>User:</strong> {{ user }}</p>
+                <p><strong>Price:</strong> {{ order.price }} PLN</p>
+                <p><strong>Purchase Date:</strong> {{ purchase_date }}</p>
+            </div>
+
+            {% if order.event.place.stadiumPhoto %}
+            <div class="map">
+                <img src="{{ order.event.place.stadiumPhoto.url }}" alt="Stadium Map" class="img-fluid">
+            </div>
+            {% endif %}
+
+            <div class="qr-code">
+                <img src="{{ qr_code_url }}" alt="QR Code">
+            </div>
+
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

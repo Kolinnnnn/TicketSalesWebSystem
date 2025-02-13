@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Tickets</title>
+    <style>
+        body {
+            font-family: 'DejaVu Sans', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        .btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Your Tickets</h1>
+        </div>
+        <div class="content">
+            <p>Dear {{ user.email }},</p>
+            <p>Thank you for your purchase. Attached, you will find your tickets for the event:</p>
+            <p><strong>{{ tickets.0.event.title }}</strong></p>
+            <p>Date: <strong>{{ tickets.0.event.start|date:"d-m-Y H:i" }}</strong></p>
+            <p>We hope you enjoy the event!</p>
+            <p>You can also download your tickets directly from your account on our platform.</p>
+            <a href="{% url 'dashboard' %}" class="btn">Go to Dashboard</a>
+        </div>
+        <div class="footer">
+            <p>Thank you for choosing us. If you have any questions, please contact our support.</p>
+        </div>
+    </div>
+</body>
+</html>

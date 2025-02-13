@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+<div class="container mt-5 cart-container">
+    <h2 class="cart-title text-center mb-5">Your Cart</h2>
+    
+    {% if cart_items %}
+        <div class="cart-items-container">
+            {% for item in cart_items %}
+                <div class="cart-item shadow-sm p-4 mb-4 bg-white rounded position-relative">
+                    <div class="item-header d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="item-title text-primary">{{ item.event.title }}</h4>
+                        <p class="item-price mb-0"><strong>{{ item.ticket_price }} zł</strong></p>
+                    </div>
+                    <hr>
+                    <div class="item-details">
+                        <p><strong>Seat:</strong> {{ item.seat.name }}, {{ item.seat.row.name }}, {{ item.seat.row.sector.name }}</p>
+                        <p><strong>Category:</strong> {{ item.ticket_category|title }}</p>
+                    </div>
+                    <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger mt-3">Remove ticket</button>
+                    </form>
+                    <div class="time-left" id="timer-{{ item.id }}"></div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="total-price-container text-end mt-4">
+            <h4><strong>Total Price:</strong> {{ total_price }} zł</h4>
+        </div>
+
+        <div class="cart-buttons d-flex justify-content-center gap-3 mt-4">
+            <form method="post" action="{% url 'create-checkout-session' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg btn-success px-4">Proceed to Checkout</button>
+            </form>
+            <a href="{% url 'clear_cart' %}" class="btn btn-lg btn-danger px-4">Clear Cart</a>
+        </div>
+    {% else %}
+        <p class="empty-cart text-center mt-5">Your cart is empty. Add tickets to the cart.</p>
+    {% endif %}
+    
+    <div class="text-center mt-5">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg">Back to Dashboard</a>
+    </div>
+</div>
+
+<script src="{% static 'js/cart/cart.js' %}"></script>
+<script>
+    const cartItemsData = JSON.parse('{{ cart_items_data|escapejs }}');
+</script>
+{% endblock %}

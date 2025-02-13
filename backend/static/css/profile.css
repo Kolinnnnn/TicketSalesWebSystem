@@ -1,0 +1,53 @@
+.profile-header {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profile-subheader {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.ticket-card {
+    border: none;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.card-subtitle {
+    font-weight: 500;
+    color: #17a2b8;
+}
+
+.event-time {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-top: -5px;
+}
+
+.seat-info {
+    color: #343a40;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.ticket-button {
+    border-radius: 50px;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.25rem;
+}
+
+.ticket-button:hover {
+    color: #fff;
+}

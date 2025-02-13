@@ -1,0 +1,43 @@
+.fixed-alerts-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 1050;
+}
+
+.fixed-alerts-container .alert {
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    font-weight: bold;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fixed-alerts-container .alert-success {
+    color: #ffffff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.fixed-alerts-container .alert-danger {
+    color: #ffffff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.fixed-alerts-container .alert.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fixed-alerts-container .alert.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.alert-danger .btn-close {
+    color: #fff;
+    opacity: 0.8;
+}

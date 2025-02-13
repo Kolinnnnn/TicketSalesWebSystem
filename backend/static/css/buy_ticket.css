@@ -1,0 +1,44 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stadium-map {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    margin-top: 5px;
+}
+
+#calculated-price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.btn-primary, .btn-secondary, .btn-info, .btn-warning {
+    width: 100%;
+    margin: 10px 0;
+}
+
+#action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#action-buttons .btn {
+    width: 48%;
+}
